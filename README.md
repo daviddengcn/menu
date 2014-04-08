@@ -21,6 +21,8 @@ menu.sh "Item 0" "Item 1" "Item 2"
 
 When the user make the choice by pressing `Enter`, the command returns and exit code is set to the zero-based index of the selected item. If the user press `Ctrl+C`, exit code is set to `255`.
 
+* Example
+
 The following script shows an menu of all non current branches in the current git repository, and the user can choose a branch to checkout. A `cancel` button is provided as well.
 ```base
 #!/bin/bash
