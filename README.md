@@ -3,9 +3,8 @@ menu
 
 A tool for showing menu under linux command line.
 
-Usage
------
-* Install
+## Usage
+### Install
 
 ```bash
 go get github.com/daviddengcn/menu
@@ -13,7 +12,7 @@ go install github.com/daviddengcn/menu
 cp $GOPATH/src/github.com/daviddengcn/menu/menu.sh $GOPATH/bin
 ```
 
-* Run
+### Run
 
 ```bash
 menu.sh "Item 0" "Item 1" "Item 2"
@@ -21,7 +20,7 @@ menu.sh "Item 0" "Item 1" "Item 2"
 
 When the user make the choice by pressing `Enter`, the command returns and exit code is set to the zero-based index of the selected item. If the user press `Ctrl+C`, exit code is set to `255`.
 
-* Example
+### Example
 
 The following script shows an menu of all non current branches in the current git repository, and the user can choose a branch to checkout. A `cancel` button is provided as well.
 ```base
