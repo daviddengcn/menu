@@ -16,7 +16,11 @@ func main() {
 	}
 	current := 0
 
-	const UP = "\x1b\x5b\x41"
+	const (
+		UP    = "\x1b\x5b\x41"
+		DOWN  = "\x1b\x5b\x42"
+		ENTER = "\r"
+	)
 
 	for i, line := range list {
 		if i == current {
@@ -39,7 +43,7 @@ func main() {
 
 	raw := make([]byte, 10)
 	tty := term.NewRawTTY(os.Stdin)
-  tty.SetEcho(nil)
+	tty.SetEcho(nil)
 	for {
 		n, err := tty.Read(raw)
 		if err != nil {
@@ -67,22 +71,20 @@ func main() {
 				fmt.Print(list[current])
 				ct.ResetColor()
 			}
-		case "\x1b\x5b\x42":
-			{
-				if current < len(list)-1 {
-					fmt.Print("\r")
-					fmt.Print(list[current])
+		case DOWN:
+			if current < len(list)-1 {
+				fmt.Print("\r")
+				fmt.Print(list[current])
 
-					current++
-					fmt.Print(str)
+				current++
+				fmt.Print(str)
 
-					fmt.Print("\r")
-					ct.ChangeColor(ct.Black, false, ct.White, false)
-					fmt.Print(list[current])
-					ct.ResetColor()
-				}
+				fmt.Print("\r")
+				ct.ChangeColor(ct.Black, false, ct.White, false)
+				fmt.Print(list[current])
+				ct.ResetColor()
 			}
-		case "\r":
+		case ENTER:
 			for i := current; i < len(list); i++ {
 				fmt.Print("\n")
 			}
