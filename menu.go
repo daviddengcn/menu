@@ -9,11 +9,7 @@ import (
 	"github.com/kylelemons/goat/term"
 )
 
-func main() {
-	list := os.Args[1:]
-	if len(list) == 0 {
-		return
-	}
+func Select(list ...string) int {
 	current := 0
 
 	const (
@@ -48,7 +44,7 @@ func main() {
 		n, err := tty.Read(raw)
 		if err != nil {
 			fmt.Printf("read: %s\n", err)
-			return
+			return -1
 		}
 		str := string(raw[:n])
 		switch str {
@@ -57,7 +53,7 @@ func main() {
 				fmt.Print("\n")
 			}
 			fmt.Print("\r")
-			os.Exit(-1)
+			return -1
 		case UP:
 			if current > 0 {
 				fmt.Print("\r")
@@ -89,7 +85,15 @@ func main() {
 				fmt.Print("\n")
 			}
 			fmt.Print("\r")
-			os.Exit(current)
+			return current
 		}
 	}
+}
+
+func main() {
+	list := os.Args[1:]
+	if len(list) == 0 {
+		return
+	}
+	os.Exit(Select(list...))
 }
