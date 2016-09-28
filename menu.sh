@@ -1,6 +1,6 @@
 #!/bin/bash
 stty raw -echo
-menu $@
+menu "$@"
 res=$?
 stty cooked echo
-exit $res
+exit "$res"
